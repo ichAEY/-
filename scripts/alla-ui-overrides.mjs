@@ -1,7 +1,12 @@
 import fs from "node:fs";
 
 const cssPath = "app/globals.css";
+const componentPath = "app/mobile-claytone.tsx";
 let css = fs.readFileSync(cssPath, "utf8");
+let source = fs.readFileSync(componentPath, "utf8");
+
+// Remove the last hidden client-specific label inherited from the canonical base.
+source = source.replaceAll("Бесконечная галерея работ Нонны", "Бесконечная галерея работ Аллы");
 
 css += `
 
@@ -34,5 +39,6 @@ css += `
 }
 `;
 
+fs.writeFileSync(componentPath, source, "utf8");
 fs.writeFileSync(cssPath, css, "utf8");
 console.log("Alla UI overrides applied.");
