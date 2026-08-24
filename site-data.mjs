@@ -1,4 +1,4 @@
-const bookingUrl = "https://yandex.com/maps/org/studiya_professionalnogo_manikyura_i_pedikyura/53831548320/";
+const bookingUrl = "https://yandex.com/maps/org/studiya_professionalnogo_manikyura_i_pedikyura/53831548320/?booking%5Bpage%5D=resources&booking%5Bpermalink%5D=53831548320&ll=37.628810%2C55.737659&z=17";
 const service = (name, price, time = "", description = "") => ({ name, price, time, description, url: bookingUrl });
 
 const portfolioFiles = [
