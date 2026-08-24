@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ichAEY/tanem-master-template-v1
-          ref: 1179d7506b1aa7ca22db066d3a60a7950561b51c
+          ref: d10e4e1bc85ac2c497a23ae776e0813d8250bd52
           path: factory
 
       - name: Apply Alla data to Nonna template
