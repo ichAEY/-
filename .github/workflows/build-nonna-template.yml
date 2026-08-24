@@ -6,7 +6,8 @@ on:
     paths:
       - 'site-data.mjs'
       - '000*fail.png'
-      - 'omastereiglavnayanapk.png'
+      - '121.png'
+      - '212.png'
       - '.github/workflows/build-nonna-template.yml'
   workflow_dispatch:
 
@@ -39,7 +40,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ichAEY/tanem-master-template-v1
-          ref: 2c3590bdb8d4163532d126d67f27be1469a426c5
+          ref: 1179d7506b1aa7ca22db066d3a60a7950561b51c
           path: factory
 
       - name: Apply Alla data to Nonna template
@@ -49,7 +50,8 @@ jobs:
           cp customer/site-data.mjs template/site-data.mjs
           rm -f template/public/CNAME
           mkdir -p template/public/assets/client/portfolio
-          cp customer/omastereiglavnayanapk.png template/public/assets/client/master.png
+          cp customer/121.png template/public/assets/client/hero.png
+          cp customer/212.png template/public/assets/client/about.png
           for file in customer/000*fail.png; do
             cp "$file" "template/public/assets/client/portfolio/$(basename "$file")"
           done
@@ -57,6 +59,7 @@ jobs:
           cp factory/scripts/apply-tanem-final.mjs template/scripts/tanem-final.mjs
           cp factory/scripts/apply-tanem-polish.mjs template/scripts/tanem-polish.mjs
           cp factory/scripts/apply-tanem-tuning.mjs template/scripts/tanem-tuning.mjs
+          cp factory/scripts/apply-tanem-stability.mjs template/scripts/tanem-stability.mjs
           printf '%s\n' '// external booking link' > template/public/noop.js
 
       - name: Setup Node
@@ -78,6 +81,7 @@ jobs:
           node scripts/tanem-final.mjs
           node scripts/tanem-polish.mjs
           node scripts/tanem-tuning.mjs
+          node scripts/tanem-stability.mjs
 
       - name: Configure static export for repository Pages path
         working-directory: template
