@@ -31,7 +31,7 @@ css += `
     grid-column: auto !important;
     width: auto !important;
     white-space: normal !important;
-    text-align: center !important;
+    text-align: left !important;
     color: #494441 !important;
     background: none !important;
     animation: none !important;
