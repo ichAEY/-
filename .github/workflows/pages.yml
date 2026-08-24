@@ -3,10 +3,12 @@ name: Deploy Alla TANEM site
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - deploy-status.json
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -129,6 +131,9 @@ jobs:
           npx next build
           test -s out/index.html
           test -d out/_next
+          test -s out/assets/client/master.png
+          test -s out/assets/client/portfolio/00001fail.png
+          test -s out/assets/client/portfolio/00011fail.png
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -150,3 +155,18 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Checkout status branch
+        uses: actions/checkout@v4
+
+      - name: Record successful deployment
+        shell: bash
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          printf '{"status":"success","sha":"%s","url":"%s"}\n' "$GITHUB_SHA" "$PAGE_URL" > deploy-status.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add deploy-status.json
+          git commit -m "Update deploy status [skip ci]" || exit 0
+          git push
