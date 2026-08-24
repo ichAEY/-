@@ -8,6 +8,7 @@ on:
       - '000*fail.png'
       - '121.png'
       - '212.png'
+      - 'scripts/alla-ui-overrides.mjs'
       - '.github/workflows/build-nonna-template.yml'
   workflow_dispatch:
 
@@ -82,6 +83,7 @@ jobs:
           node scripts/tanem-polish.mjs
           node scripts/tanem-tuning.mjs
           node scripts/tanem-stability.mjs
+          node ../customer/scripts/alla-ui-overrides.mjs
 
       - name: Configure static export for repository Pages path
         working-directory: template
