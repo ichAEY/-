@@ -3,7 +3,7 @@
 5:I[37457,["/-/_next/static/chunks/0dbhjjzl8qfwv.js"],"default"]
 :HL["/-/_next/static/chunks/05ia3yn80h50n.css","style"]
 :HL["/-/_next/static/chunks/04v75c2mdnl-w.css","style"]
-2:Te4f,
+2:Te18,
   .mct-map-wrap {
     width: 100% !important;
     height: auto !important;
@@ -124,15 +124,15 @@
     }
 
     .mct-map-wrap > a::before {
-      width: 66px !important;
-      height: 66px !important;
-      font-size: 33px !important;
+      width: 66px;
+      height: 66px;
+      font-size: 33px;
     }
 
     .mct-map-wrap > a::after {
-      font-size: 16px !important;
-      line-height: 1.65 !important;
+      font-size: 16px;
+      line-height: 1.65;
     }
   }
-0:{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/-/_next/static/chunks/05ia3yn80h50n.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/-/_next/static/chunks/04v75c2mdnl-w.css","precedence":"next"}],["$","script","script-0",{"src":"/-/_next/static/chunks/0dbhjjzl8qfwv.js","async":true}]],["$","html",null,{"lang":"ru","children":[["$","head",null,{"children":[["$","meta",null,{"httpEquiv":"Content-Security-Policy","content":"frame-src 'self' https://*.yclients.com https://yclients.com;"}],["$","style",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],"$L3"]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"2sa1gPjKO8T27e31iSoV6"}
-3:["$","body",null,{"children":[["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}],["$","a",null,{"id":"yclients-booking-proxy","className":"ms_booking yclients-booking-proxy","data-url":"https://yandex.com/maps/org/studiya_professionalnogo_manikyura_i_pedikyura/53831548320/?booking%5Bpage%5D=resources&booking%5Bpermalink%5D=53831548320&ll=37.628810%2C55.737659&z=17","aria-hidden":"true","tabIndex":-1}],["$","script",null,{"src":"tanem-metrika-events.js?v=20260823-1","defer":true}],["$","script",null,{"src":"claytone-enhancements.js?v=20260822-1","defer":true}],["$","script",null,{"src":"android-scroll-fix.js?v=20260813-2","defer":true}],["$","script",null,{"type":"text/javascript","src":"/-/noop.js","charSet":"UTF-8","defer":true}]]}]
+0:{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/-/_next/static/chunks/05ia3yn80h50n.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/-/_next/static/chunks/04v75c2mdnl-w.css","precedence":"next"}],["$","script","script-0",{"src":"/-/_next/static/chunks/0dbhjjzl8qfwv.js","async":true}]],["$","html",null,{"lang":"ru","children":[["$","head",null,{"children":[["$","meta",null,{"httpEquiv":"Content-Security-Policy","content":"frame-src 'self' https://*.yclients.com https://yclients.com;"}],["$","style",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],"$L3"]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"rvxRBM8cYYaVYT-rA9Ds3"}
+3:["$","body",null,{"children":[["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}],["$","a",null,{"id":"yclients-booking-proxy","className":"ms_booking yclients-booking-proxy","data-url":"https://yandex.com/maps/org/studiya_professionalnogo_manikyura_i_pedikyura/53831548320/?booking%5Bpage%5D=resources&booking%5Bpermalink%5D=53831548320&ll=37.628810%2C55.737659&z=17","aria-hidden":"true","tabIndex":-1}],["$","script",null,{"src":"claytone-enhancements.js?v=20260813-8","defer":true}],["$","script",null,{"src":"android-scroll-fix.js?v=20260813-2","defer":true}],["$","script",null,{"type":"text/javascript","src":"/-/noop.js","charSet":"UTF-8","defer":true}]]}]
