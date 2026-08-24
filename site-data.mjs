@@ -80,7 +80,7 @@ export default {
 
   reputation: {
     rating: "5,0",
-    reviewCount: "40",
+    reviewCount: "41",
   },
 
   images: {
