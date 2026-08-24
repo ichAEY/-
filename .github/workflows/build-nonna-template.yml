@@ -1,0 +1,166 @@
+name: Build canonical Nonna template for Alla
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site-data.mjs'
+      - '000*fail.png'
+      - 'omastereiglavnayanapk.png'
+      - '.github/workflows/build-nonna-template.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-nonna-template
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Alla repository
+        uses: actions/checkout@v4
+        with:
+          path: customer
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout canonical Nonna site
+        uses: actions/checkout@v4
+        with:
+          repository: ichAEY/claytone-current
+          ref: 89647b7d61ebcdfd43f74de2afa4d81b3dfb0194
+          path: template
+
+      - name: Checkout TANEM adaptive layer
+        uses: actions/checkout@v4
+        with:
+          repository: ichAEY/tanem-master-template-v1
+          ref: 2c3590bdb8d4163532d126d67f27be1469a426c5
+          path: factory
+
+      - name: Apply Alla data to Nonna template
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp customer/site-data.mjs template/site-data.mjs
+          rm -f template/public/CNAME
+          mkdir -p template/public/assets/client/portfolio
+          cp customer/omastereiglavnayanapk.png template/public/assets/client/master.png
+          for file in customer/000*fail.png; do
+            cp "$file" "template/public/assets/client/portfolio/$(basename "$file")"
+          done
+          cp factory/scripts/apply-tanem-template.mjs template/scripts/tanem-template.mjs
+          cp factory/scripts/apply-tanem-final.mjs template/scripts/tanem-final.mjs
+          cp factory/scripts/apply-tanem-polish.mjs template/scripts/tanem-polish.mjs
+          cp factory/scripts/apply-tanem-tuning.mjs template/scripts/tanem-tuning.mjs
+          printf '%s\n' '// external booking link' > template/public/noop.js
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: template/package-lock.json
+
+      - name: Install dependencies
+        working-directory: template
+        run: npm ci
+
+      - name: Generate Alla site inside canonical Nonna layout
+        working-directory: template
+        run: |
+          node scripts/generate-site.mjs
+          node scripts/tanem-template.mjs
+          node scripts/tanem-final.mjs
+          node scripts/tanem-polish.mjs
+          node scripts/tanem-tuning.mjs
+
+      - name: Configure static export for repository Pages path
+        working-directory: template
+        shell: bash
+        run: |
+          cat > next.config.ts <<'EOF'
+          import type { NextConfig } from "next";
+          const basePath = process.env.SITE_BASE_PATH || "";
+          const nextConfig: NextConfig = {
+            output: "export",
+            trailingSlash: true,
+            images: { unoptimized: true },
+            basePath,
+          };
+          export default nextConfig;
+          EOF
+
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const prefix = process.env.SITE_BASE_PATH || '';
+          const roots = ['app', 'public'];
+          const allowed = new Set(['.tsx','.ts','.js','.mjs','.css','.html']);
+          const replacements = [
+            ['/assets/', `${prefix}/assets/`],
+            ['/claytone-enhancements.js', `${prefix}/claytone-enhancements.js`],
+            ['/android-scroll-fix.js', `${prefix}/android-scroll-fix.js`],
+            ['/favicon.svg', `${prefix}/favicon.svg`],
+            ['/noop.js', `${prefix}/noop.js`],
+          ];
+          function walk(dir) {
+            for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
+              const full = path.join(dir, entry.name);
+              if (entry.isDirectory()) walk(full);
+              else if (allowed.has(path.extname(entry.name))) {
+                let text = fs.readFileSync(full,'utf8');
+                for (const [from,to] of replacements) text = text.split(from).join(to);
+                fs.writeFileSync(full,text);
+              }
+            }
+          }
+          for (const root of roots) if (fs.existsSync(root)) walk(root);
+          NODE
+
+          rm -rf public/_next
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='tsconfig.json';
+          const c=JSON.parse(fs.readFileSync(p,'utf8'));
+          c.exclude=[...(c.exclude||[]),'db/**','worker/**','examples/**','build/**','drizzle/**','drizzle.config.ts','vite.config.ts'];
+          fs.writeFileSync(p,JSON.stringify(c,null,2)+'\n');
+          NODE
+        env:
+          SITE_BASE_PATH: /-
+
+      - name: Build static site
+        working-directory: template
+        env:
+          SITE_BASE_PATH: /-
+        run: |
+          npx next build
+          test -s out/index.html
+          test -d out/_next
+
+      - name: Replace old static page with canonical Nonna build
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd customer
+          rm -rf _next assets 404.html index.html styles.css script.js favicon.svg claytone-enhancements.js android-scroll-fix.js noop.js
+          cp -a ../template/out/. .
+          touch .nojekyll
+
+      - name: Commit generated site to main
+        working-directory: customer
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+            exit 0
+          fi
+          git commit -m "Generate Alla from canonical Nonna template"
+          git push origin HEAD:main
