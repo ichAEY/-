@@ -28,11 +28,11 @@ jobs:
           path: customer
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout canonical Nonna site
+      - name: Checkout canonical Nonna visual base
         uses: actions/checkout@v4
         with:
           repository: ichAEY/claytone-current
-          ref: 89647b7d61ebcdfd43f74de2afa4d81b3dfb0194
+          ref: ce1bd42b44e76e1851af9e069c4cbcf06fc8eac2
           path: template
 
       - name: Checkout TANEM adaptive layer
