@@ -137,12 +137,12 @@ jobs:
           fs.writeFileSync(p,JSON.stringify(c,null,2)+'\n');
           NODE
         env:
-          SITE_BASE_PATH: /-
+          SITE_BASE_PATH: /Alla
 
       - name: Build static site
         working-directory: template
         env:
-          SITE_BASE_PATH: /-
+          SITE_BASE_PATH: /Alla
         run: |
           npx next build
           test -s out/index.html
