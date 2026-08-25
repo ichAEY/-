@@ -85,7 +85,7 @@ jobs:
           node scripts/tanem-stability.mjs
           node ../customer/scripts/alla-ui-overrides.mjs
 
-      - name: Configure static export for repository Pages path
+      - name: Configure static export for custom domain
         working-directory: template
         shell: bash
         run: |
@@ -137,12 +137,12 @@ jobs:
           fs.writeFileSync(p,JSON.stringify(c,null,2)+'\n');
           NODE
         env:
-          SITE_BASE_PATH: /Alla
+          SITE_BASE_PATH: ""
 
       - name: Build static site
         working-directory: template
         env:
-          SITE_BASE_PATH: /Alla
+          SITE_BASE_PATH: ""
         run: |
           npx next build
           test -s out/index.html
